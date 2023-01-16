@@ -1,0 +1,40 @@
+@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+
+<style>
+    @section Styles
+    {
+        @if (Model.TenantInfo?.Identifier == "acme")
+        {
+            <link href="@Url.Content("/css/site1.css")" rel="stylesheet" type="text/css" />
+        }
+        else if (Model.TenantInfo?.Identifier == "megacorp")
+        {
+            <link href="@Url.Content("/css/site2.css")" rel="stylesheet" type="text/css" />
+        }
+        else if (Model.TenantInfo?.Identifier == "initech")
+        {
+            <link href="@Url.Content("/css/site3.css")" rel="stylesheet" type="text/css" />
+        }
+            
+    }
+
+</style>
+
+<h1>@ViewData["Title"]</h1>
+
+@if (string.IsNullOrWhiteSpace(Model.HtmlContent))
+{
+    <p>Use this page to detail your site's privacy policy.</p>
+}
+else
+{
+    <div class="tenant">
+        @Html.Raw(Model.HtmlContent)
+    </div>
+    
+}
